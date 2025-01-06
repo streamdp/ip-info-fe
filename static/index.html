@@ -1,0 +1,66 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IP-INFO - service for determining location by IP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.png">
+</head>
+
+<body>
+    <header class="container">
+        <div class="top-center">
+            <h3>IP-INFO - service for determining location by IP</h3>
+        </div>
+    </header>
+
+    <main hx-ext="client-side-templates" class="container">
+      <template id="info-template">
+          <header>
+              <p><b>IP:</b> {{ content.ip }}</p>
+          </header>
+          <main>
+              {% if content.city %}<p><b>City:</b> {{content.city}}</p>{% endif %}
+              {% if content.country %}<p><b>Country:</b> {{content.country}}</p>{% endif %}
+              {% if content.state_prov %}<p><b>State/Province:</b> {{content.state_prov}}</p>{% endif %}
+              <p><b>Latitude (ϕ):</b> {{content.latitude}}</p>
+              <p><b>Longitude (λ)</b>: {{content.longitude}}</p>
+              <p><b>Continent:</b> {{content.continent}}</p>
+          </main>
+      </template>
+      <div class="left">
+          <form hx-get="/ip-info" hx-target="#search-result" nunjucks-template="info-template">
+              <h4><label for="ip-input">Get IP information:</label></h4>
+              <input id="ip-input" type="text" name="ip" placeholder="xxx.xxx.xxx.xxx">
+              <button type="submit">Locate</button>
+          </form>
+          <div id="search-result"></div>
+      </div>
+      <div class="right" hx-get="/client-ip" hx-target="#result" hx-trigger="load" nunjucks-template="info-template">
+          <h4>Client IP information (my IP):</h4>
+          <div id="result"></div>
+      </div>
+  </main>
+
+  <footer class="container">
+      <div class="item-bottom-center">&copy;
+          <span id="copyright">
+              <script>
+                document.getElementById('copyright').appendChild(
+                    document.createTextNode(new Date().getFullYear())
+                )
+              </script>
+          </span>
+          You can see the source code on my <a href="https://github.com/streamdp" target="_blank">GitHub</a>
+      </div>
+
+      <script src="js/htmx.min.js"></script>
+      <script src="js/client-side-templates.js"></script>
+      <script src="js/nunjucks.min.js"></script>
+  </footer>
+</body>
+</html>
