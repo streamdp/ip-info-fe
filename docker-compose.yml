@@ -1,0 +1,8 @@
+version: "3.5"
+services:
+  static:
+    build: .
+    image: static:latest
+    container_name: static
+    ports:
+      - "80:80"
