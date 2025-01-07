@@ -1,4 +1,6 @@
 ## IP location service frontend
+[![Website ip-info.oncook.top](https://img.shields.io/website-up-down-green-red/https/ip-info.oncook.top.svg)](https://ip-info.oncook.top)
+
 Simple frontend for the [ip-info](https://github.com/streamdp/ip-info) service written with [htmx](https://htmx.org/). 
 Provides information about the client's IP address and also gives you the ability to get
 information about any IP address you want.
