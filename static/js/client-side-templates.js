@@ -1,6 +1,5 @@
 htmx.defineExtension('client-side-templates', {
     transformResponse : function(text, xhr, elt) {
-
         var mustacheTemplate = htmx.closest(elt, "[mustache-template]");
         if (mustacheTemplate) {
             var data = JSON.parse(text);
