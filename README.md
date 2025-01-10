@@ -15,12 +15,12 @@ or use simple compose file, such like that one:
 ```shell
 version: "3.5"
 services:
-  static:
-    build: .
-    image: static:latest
-    container_name: static
+  ip-info-fe:
+    image: streamdp/ip-info-fe:v0.0.1
+    container_name: ip-info-fe
     ports:
       - "80:80"
+    restart: always
 ```
 and run this with the following command:
 ```shell
