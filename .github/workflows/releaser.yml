@@ -7,15 +7,11 @@ jobs:
     name: Release pushed tag
     runs-on: ubuntu-24.04
     steps:
-      - name: Create release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref_name }}
-        run: |
-          gh release create "$tag" \
-              --repo="$GITHUB_REPOSITORY" \
-              --title="${tag#v}" \
-              --generate-notes
+    - name: Create release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref_name }}
+      run: gh release create "$tag" --repo="$GITHUB_REPOSITORY" --title="${tag#v}" --generate-notes
   build_and_push_image:
     name: Build and push docker image
     runs-on: ubuntu-24.04
