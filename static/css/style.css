@@ -157,9 +157,9 @@ body {
     min-width: 536px;
     margin: 10px auto;
     padding: 10px;
+    text-align: center;
     background-color: cadetblue;
     border: solid darkslategray;
-    text-align: center;
   }
   .top-center-referral-badge {
     height: 10%;
@@ -167,18 +167,19 @@ body {
     min-width: 536px;
     margin: 10px auto;
     padding: 10px;
+    text-align: center;
     background-color: darkseagreen;
     border: solid darkolivegreen;
-    text-align: center;
   }
   .item-bottom-center {
     height: 10%;
     width: 25%;
     min-width: 536px;
+    margin: auto;
     padding: 10px;
+    text-align: center;
     background-color: burlywood;
     border: solid indianred;
-    text-align: center;
   }
 }
 @media only screen and (max-width: 580px) {
@@ -214,17 +215,17 @@ body {
   }
   .top-center-referral-badge {
     height: 10%;
-    width: 25%;
-    min-width: 536px;
+    width: 90%;
     margin: 10px auto;
     padding: 10px;
-    background-color: cadetblue;
-    border: solid darkslategray;
     text-align: center;
+    background-color: darkseagreen;
+    border: solid darkolivegreen;
   }
   .item-bottom-center {
     height: 10%;
     width: 90%;
+    margin: auto;
     padding: 10px;
     text-align: center;
     background-color: burlywood;
