@@ -161,11 +161,20 @@ body {
     border: solid darkslategray;
     text-align: center;
   }
-  .item-bottom-center {
+  .top-center-referral-badge {
     height: 10%;
     width: 25%;
     min-width: 536px;
     margin: 10px auto;
+    padding: 10px;
+    background-color: darkseagreen;
+    border: solid darkolivegreen;
+    text-align: center;
+  }
+  .item-bottom-center {
+    height: 10%;
+    width: 25%;
+    min-width: 536px;
     padding: 10px;
     background-color: burlywood;
     border: solid indianred;
@@ -203,13 +212,26 @@ body {
     background-color: cadetblue;
     border: solid darkslategray;
   }
+  .top-center-referral-badge {
+    height: 10%;
+    width: 25%;
+    min-width: 536px;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: cadetblue;
+    border: solid darkslategray;
+    text-align: center;
+  }
   .item-bottom-center {
     height: 10%;
     width: 90%;
-    margin: 10px auto;
     padding: 10px;
     text-align: center;
     background-color: burlywood;
     border: solid indianred;
   }
+}
+
+.mix-blend-multiply {
+  mix-blend-mode: multiply;
 }

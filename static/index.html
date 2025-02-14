@@ -33,7 +33,7 @@
             <form id="ip-info-form" hx-get="/ip-info" hx-target="#search-result" nunjucks-template="info-template">
                 <h4><label for="ip-input">Get IP information:</label></h4>
                 <input id="ip-input" type="text" name="ip" placeholder="IP4/IP6" onchange="this.setCustomValidity('')"
-                    hx-on:htmx:validation:validate="
+                        hx-on:htmx:validation:validate="
                         if (!isValidIp(this.value)) {
                             this.setCustomValidity('Please enter the correct IP address')
                             htmx.find('#ip-info-form').reportValidity()
@@ -48,6 +48,12 @@
             <div id="client-result"></div>
         </div>
     </main>
+
+    <div class="top-center-referral-badge">
+        <a href="https://www.digitalocean.com/?refcode=253bf19488bd&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge">
+            <img class="mix-blend-multiply" src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%202.svg" alt="DigitalOcean Referral Badge" />
+        </a>
+    </div>
 
     <footer class="container">
         <div class="item-bottom-center">&copy;
