@@ -31,10 +31,10 @@ $ docker-compose up -d
    <img style="width: 75%" src="assets/index.png" alt="ip location service screenshot">
 </div>
 
-## Contributing
+### Contributing
 Contributions are welcome! If you encounter any issues, have suggestions for new features, or want to improve **ip-info-fe**, please feel free to open an issue or submit a pull request on the project's GitHub repository.
 
-## License
+### License
 **ip-info-fe** is released under the _Apache 2.0_ License. See the [LICENSE](https://github.com/streamdp/ip-info-fe/blob/main/LICENSE) file for complete license details.
 
 ### Support project
