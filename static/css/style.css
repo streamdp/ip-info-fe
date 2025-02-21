@@ -181,6 +181,17 @@ body {
     background-color: burlywood;
     border: solid indianred;
   }
+  .error {
+    color: maroon;
+    height: 10%;
+    width: 25%;
+    min-width: 536px;
+    margin: 10px auto;
+    padding: 10px;
+    text-align: center;
+    background-color: darksalmon;
+    border: solid darkred;
+  }
 }
 @media only screen and (max-width: 580px) {
   .container {
@@ -231,8 +242,19 @@ body {
     background-color: burlywood;
     border: solid indianred;
   }
+  .error {
+    color: maroon;
+    height: 10%;
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    text-align: center;
+    background-color: darksalmon;
+    border: solid darkred;
+  }
 }
 
 .mix-blend-multiply {
   mix-blend-mode: multiply;
 }
+

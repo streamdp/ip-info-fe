@@ -30,24 +30,34 @@
         </template>
 
         <div class="left">
-            <form id="ip-info-form" hx-get="/ip-info" hx-target="#search-result" nunjucks-template="info-template">
+            <form id="ip-info-form"
+                  hx-get="/ip-info"
+                  hx-target="#search-result"
+                  nunjucks-template="info-template"
+                  hx-on::before-request="clear('search-result')"
+            >
                 <h4><label for="ip-input">Get IP information:</label></h4>
-                <input id="ip-input" type="text" name="ip" placeholder="IP4/IP6" onchange="this.setCustomValidity('')"
-                        hx-on:htmx:validation:validate="
-                        if (!isValidIp(this.value)) {
-                            this.setCustomValidity('Please enter the correct IP address')
-                            htmx.find('#ip-info-form').reportValidity()
-                        }">
+                <input id="ip-input" type="text" name="ip" placeholder="IP4/IP6"
+                       onchange="this.setCustomValidity('')"
+                       hx-on:htmx:validation:validate="validate(this)"
+                >
                 <button type="submit">Locate</button>
             </form>
             <div id="search-result"></div>
         </div>
 
-        <div class="right" hx-get="/client-ip" hx-target="#client-result" hx-trigger="load" nunjucks-template="info-template">
+        <div class="right"
+             hx-get="/client-ip"
+             hx-target="#client-result"
+             hx-trigger="load"
+             nunjucks-template="info-template"
+        >
             <h4>Client IP information (my IP):</h4>
             <div id="client-result"></div>
         </div>
     </main>
+
+    <div id="error" class="error" hidden></div>
 
     <div class="top-center-referral-badge">
         <a href="https://www.digitalocean.com/?refcode=253bf19488bd&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge">
@@ -57,13 +67,7 @@
 
     <footer class="container">
         <div class="item-bottom-center">&copy;
-            <span id="copyright">
-                <script>
-                  document.getElementById('copyright').appendChild(
-                      document.createTextNode(new Date().getFullYear())
-                  )
-                </script>
-            </span>
+            <span id="copyright"><script>document.write(new Date().getFullYear())</script></span>
             You can see the source code on my <a href="https://github.com/streamdp" target="_blank">GitHub</a>
         </div>
 
@@ -71,6 +75,7 @@
         <script src="js/client-side-templates.js"></script>
         <script src="js/nunjucks.min.js"></script>
         <script src="js/ip.js"></script>
+        <script src="js/error.js"></script>
     </footer>
 </body>
 </html>

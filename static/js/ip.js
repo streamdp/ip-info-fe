@@ -7,3 +7,15 @@ function isIp6(ip6){
 function isValidIp(ip) {
     return isIp4(ip) || isIp6(ip)
 }
+
+
+function validate(input) {
+    if (!isValidIp(input.value)) {
+        input.setCustomValidity('Please enter the correct IP address.')
+        input.reportValidity()
+    }
+}
+
+function clear(id) {
+    document.getElementById(id).innerHTML=''
+}
