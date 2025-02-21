@@ -8,7 +8,6 @@ function isValidIp(ip) {
     return isIp4(ip) || isIp6(ip)
 }
 
-
 function validate(input) {
     if (!isValidIp(input.value)) {
         input.setCustomValidity('Please enter the correct IP address.')
