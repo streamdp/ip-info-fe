@@ -36,6 +36,3 @@ Contributions are welcome! If you encounter any issues, have suggestions for new
 
 ### License
 **ip-info-fe** is released under the _Apache 2.0_ License. See the [LICENSE](https://github.com/streamdp/ip-info-fe/blob/main/LICENSE) file for complete license details.
-
-### Support project
-[DigitalOcean](https://www.digitalocean.com/?refcode=253bf19488bd&utm_campaign=Referral_Invite&utm_medium=Referral_Program) referral link.
