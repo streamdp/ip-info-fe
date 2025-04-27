@@ -37,8 +37,8 @@ jobs:
       uses: docker/metadata-action@v5.5.1
       with:
         images: |
-          streamdp/ip-info-fe
-          ghcr.io/streamdp/ip-info-fe
+          ${{ github.repository }}
+          ghcr.io/${{ github.repository }}
     - name: Build and push Docker image
       uses: docker/build-push-action@v6.2.0
       with:
@@ -47,3 +47,10 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         build-args: VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
+    - name: Docker Scout
+      uses: docker/scout-action@v1
+      with:
+        command: cves
+        image: ${{ github.repository }}:latest
+        only-severities: critical,high
+        exit-code: true
