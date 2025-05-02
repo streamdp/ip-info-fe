@@ -13,20 +13,29 @@
 
 <body>
     <header class="container">
-        <div class="top-center"><h3>IP location service</h3></div>
+        <div class="top-center" hx-ext="client-side-templates">
+            <template id="version-template">{% if content.version %}: {{content.version}}{% endif %}</template>
+
+            <div hx-get="/app/version"
+                 hx-trigger="load"
+                 hx-target="#app-version"
+                 nunjucks-template="version-template"
+            ></div>
+            <h3>IP location service<span id="app-version"></span></h3>
+        </div>
     </header>
 
-    <main hx-ext="client-side-templates" class="container">
+    <main class="container" hx-ext="client-side-templates">
         <template id="info-template">
-            <header><p><b>IP:</b> {{ content.ip }}</p></header>
-            <main>
+            <div><p><b>IP:</b> {{ content.ip }}</p></div>
+            <div>
                 {% if content.city %}<p><b>City:</b> {{content.city}}</p>{% endif %}
                 {% if content.country %}<p><b>Country:</b> {{content.country}}</p>{% endif %}
                 {% if content.state_prov %}<p><b>State/Province:</b> {{content.state_prov}}</p>{% endif %}
                 <p><b>Latitude (ϕ):</b> {{content.latitude}}</p>
                 <p><b>Longitude (λ)</b>: {{content.longitude}}</p>
                 <p><b>Continent:</b> {{content.continent}}</p>
-            </main>
+            </div>
         </template>
 
         <div class="left">
