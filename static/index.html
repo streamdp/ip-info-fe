@@ -14,7 +14,7 @@
 <body>
     <header class="container">
         <div class="top-center" hx-ext="client-side-templates">
-            <template id="version-template">{% if content.version %}: {{content.version}}{% endif %}</template>
+            <template id="version-template">{% if content.version %}&nbsp;{{content.version}}{% endif %}</template>
 
             <div hx-get="/app/version"
                  hx-trigger="load"
