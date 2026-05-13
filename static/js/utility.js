@@ -1,5 +1,8 @@
 const map = L.map('map', { zoomControl: false }).setView([20, 0], 2);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' }).addTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OSM',
+    className: 'map-tiles',
+}).addTo(map);
 L.control.zoom({ position: 'bottomright' }).addTo(map);
 
 const markerRegistry = {};
