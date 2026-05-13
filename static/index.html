@@ -2,83 +2,121 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IP-INFO - IP location service</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icon.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IP-INFO - Global IP Tracker</title>
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icon.png">
 </head>
 
-<body>
-    <header class="container">
-        <div class="top-center" hx-ext="client-side-templates">
-            <template id="version-template">{% if content.version %}&nbsp;{{content.version}}{% endif %}</template>
-
-            <div hx-get="/app/version"
-                 hx-trigger="load"
-                 hx-target="#app-version"
-                 nunjucks-template="version-template"
-            ></div>
-            <h3>IP location service<span id="app-version"></span></h3>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col">
+    <header class="z-50 py-8 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-md" hx-ext="client-side-templates">
+        <template id="version-template">
+            {% if content.version %}<span class="text-xs font-mono bg-indigo-100 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-300 px-2 py-1 rounded-full ml-2">{{content.version}}</span>{% endif %}
+        </template>
+        <div hx-get="/app/version" hx-trigger="load" hx-target="#app-version" nunjucks-template="version-template"></div>
+        <div class="container mx-auto px-4 md:px-8 flex flex-col items-center text-center">
+            <h3 class="text-3xl font-black tracking-tight mb-2">IP-INFO<span id="app-version"></span></h3>
         </div>
     </header>
 
-    <main class="container" hx-ext="client-side-templates">
-        <template id="info-template">
-            <div><p><b>IP:</b> {{ content.ip }}</p></div>
-            <div>
-                {% if content.city %}<p><b>City:</b> {{content.city}}</p>{% endif %}
-                {% if content.country %}<p><b>Country:</b> {{content.country}}</p>{% endif %}
-                {% if content.state_prov %}<p><b>State/Province:</b> {{content.state_prov}}</p>{% endif %}
-                <p><b>Latitude (ϕ):</b> {{content.latitude}}</p>
-                <p><b>Longitude (λ)</b>: {{content.longitude}}</p>
-                <p><b>Continent:</b> {{content.continent}}</p>
+    <main class="container mx-auto px-4 md:px-8 flex-grow flex flex-col lg:flex-row lg:h-[calc(100vh-240px)] gap-6 mb-8" hx-ext="client-side-templates">
+
+        <aside class="w-full lg:w-[400px] flex flex-col gap-6 overflow-y-auto overflow-x-hidden sidebar-scroll shrink-0">
+            <div id="error" hidden class="animate-in fade-in slide-in-from-top-4 duration-300">
+                <div class="flex items-start gap-4 p-6 bg-red-50/50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/30 rounded-3xl">
+                    <div class="flex flex-col gap-2">
+                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-red-500 leading-none">System Error</p>
+                        <p id="error-message" class="text-sm text-red-600 dark:text-red-400 font-medium break-all leading-relaxed"></p>
+                    </div>
+                </div>
             </div>
-        </template>
 
-        <div class="left">
-            <form id="ip-info-form"
-                  hx-get="/ip-info"
-                  hx-target="#search-result"
-                  nunjucks-template="info-template"
-                  hx-on::before-request="clear('search-result')"
-            >
-                <h4><label for="ip-input">Get IP information:</label></h4>
-                <input id="ip-input" type="text" name="ip" placeholder="IP4/IP6"
-                       onchange="this.setCustomValidity('')"
-                       hx-on:htmx:validation:validate="validate(this)"
-                >
-                <button type="submit">Locate</button>
-            </form>
-            <div id="search-result"></div>
-        </div>
+            <section class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none">
+                <form  id="ip-info-form"
+                       hx-get="/ip-info"
+                       hx-target="#search-result"
+                       nunjucks-template="info-template"
+                       hx-on::before-request="clear('search-result')"
+                 >
+                    <label class="block text-[10px] font-bold text-slate-400 mb-3 uppercase tracking-[0.2em]">Global Lookup</label>
+                    <div class="flex items-stretch gap-2">
+                        <input name="ip"
+                               placeholder="e.g. 1.1.1.1"
+                               onchange="this.setCustomValidity('')"
+                               hx-on:htmx:validation:validate="validate(this)"
+                               class="flex-grow px-4 py-3 rounded-2xl border border-slate-100 dark:border-slate-800 dark:bg-slate-950 outline-none focus:ring-2 focus:ring-primary-500 transition-all text-sm font-mono truncate"
+                        >
+                        <button type="submit" 
+                                class="bg-primary-600 text-black px-5 rounded-2xl font-bold hover:bg-primary-700 active:scale-95 transition shadow-lg shadow-primary-500/20">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </button>
+                    </div>
+                </form>
+                <div id="search-result" class="mt-6"></div>
+            </section>
 
-        <div class="right"
-             hx-get="/client-ip"
-             hx-target="#client-result"
-             hx-trigger="load"
-             nunjucks-template="info-template"
-        >
-            <h4>Client IP information (my IP):</h4>
-            <div id="client-result"></div>
-        </div>
+            <section class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none"
+                 hx-get="/client-ip" hx-target="#client-result" hx-trigger="load" nunjucks-template="info-template">
+                <label class="block text-[10px] font-bold text-emerald-500 mb-3 uppercase tracking-[0.2em]">Your Local Connection</label>
+                <div id="client-result"></div>
+            </section>
+        </aside>
+
+        <section class="flex-grow relative min-h-[450px] lg:min-h-0 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-2xl">
+            <div id="map" class="absolute inset-0"></div>
+        </section>
+
     </main>
 
-    <div id="error" class="error" hidden></div>
-
-    <footer class="container">
-        <div class="item-bottom-center">&copy;
-            <span id="copyright"><script>document.write(new Date().getFullYear())</script></span>
-            You can see the source code on my <a href="https://github.com/streamdp" target="_blank">GitHub</a>
+    <footer class="w-full py-8 mt-auto">
+        <div class="container mx-auto px-4 md:px-8 border-t border-slate-200 dark:border-slate-800 pt-8">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 text-slate-400">
+                <p class="text-slate-400 text-xs uppercase tracking-widest font-semibold">
+                    &copy; <span id="copyright"><script>document.write(new Date().getFullYear())</script></span> oncook.top infrastructure
+                    <a href="https://github.com/streamdp" target="_blank">(view source code)</a>
+                </p>
+            </div>
         </div>
-
-        <script src="js/htmx.min.js"></script>
-        <script src="js/client-side-templates.js"></script>
-        <script src="js/nunjucks.min.js"></script>
-        <script src="js/ip.js"></script>
-        <script src="js/error.js"></script>
     </footer>
+
+    <template id="info-template">
+        {% if error %}
+            {{ error }}
+        {% elif content %}
+            <div class="info-card animate-in fade-in slide-in-from-bottom-2 duration-500"
+                 data-lat="{{content.latitude}}"
+                 data-lng="{{content.longitude}}"
+                 data-ip="{{content.ip}}"
+                 data-city="{{content.city}}">
+                <p class="text-xl font-mono font-black tracking-tighter text-slate-800 dark:text-white leading-tight break-all">{{ content.ip }}</p>
+                {% if content.country == "ZZ" or (content.latitude == 0 and content.longitude == 0) %}
+                    <p class="text-[10px] text-amber-500 mt-4 font-black uppercase tracking-[0.2em]">📍 Data Restricted / Local</p>
+                {% else %}
+                    <div class="mt-6 space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                        <div class="flex items-center gap-3">
+                            <span class="p-2 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs shadow-inner">📍</span>
+                            <span class="font-bold">{{content.city or 'Unknown City'}}, {{content.country}}</span>
+                        </div>
+                        <div class="flex items-center gap-3 font-mono text-[11px] text-slate-400">
+                            <span class="p-2 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs shadow-inner text-base">🌐</span>
+                            <span class="tracking-widest">{{content.latitude}}, {{content.longitude}}</span>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </template>
+
+    <script src="js/htmx.min.js"></script>
+    <script src="js/client-side-templates.js"></script>
+    <script src="js/nunjucks.min.js"></script>
+    <script src="js/ip.js"></script>
+    <script src="js/error.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/utility.js"></script>
 </body>
 </html>

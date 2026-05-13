@@ -1,13 +1,51 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>Page Not Found</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/style-404.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>404 - Page Not Found | IP-INFO</title>
+    
+    <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-  <h1>Page Not Found</h1>
-  <p>Sorry, but the page you were trying to view does not exist.</p>
+
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col">
+    <header class="z-50 py-8 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-md">
+        <div class="container mx-auto px-4 md:px-8 flex flex-col items-center text-center">
+            <h3 class="text-3xl font-black tracking-tight mb-2">IP-INFO</h3>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-8 flex-grow flex items-center justify-center">
+        <div class="max-w-md w-full text-center">
+            <section class="bg-white dark:bg-slate-900 p-10 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none animate-in fade-in zoom-in duration-500">
+                <div class="mb-6 inline-flex items-center justify-center w-20 h-20 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-full">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                </div>
+                <h1 class="text-6xl font-black font-mono tracking-tighter text-slate-800 dark:text-white mb-2">404</h1>
+                <p class="text-[10px] font-bold text-slate-400 mb-6 uppercase tracking-[0.2em]">Coordinates Not Found</p>
+                <p class="text-slate-600 dark:text-slate-400 mb-8">
+                    The page you are looking for has moved to a different IP or no longer exists in our database.
+                </p>
+                <a href="/"
+                   class="inline-block bg-primary-600 text-black px-8 py-3 rounded-2xl font-bold hover:bg-primary-700 active:scale-95 transition shadow-lg shadow-primary-500/20">
+                    Return to Tracker
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="w-full py-8 mt-auto">
+        <div class="container mx-auto px-4 md:px-8 border-t border-slate-200 dark:border-slate-800 pt-8">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 text-slate-400">
+                <p class="text-slate-400 text-xs uppercase tracking-widest font-semibold">
+                    &copy; <span id="copyright"><script>document.write(new Date().getFullYear())</script></span> oncook.top infrastructure
+                    <a href="https://github.com/streamdp" target="_blank" class="hover:text-primary-500 transition">(view source code)</a>
+                </p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

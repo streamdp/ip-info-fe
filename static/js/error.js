@@ -1,24 +1,31 @@
-// https://stackoverflow.com/a/78978176
-
 htmx.on("htmx:responseError", function (evt) {
-    const error = document.getElementById('error')
+    const errorContainer = document.getElementById('error')
+    const errorText = document.getElementById('error-message')
     const xhr = evt.detail.xhr;
-    const response = JSON.parse(xhr.responseText)
 
-    error.innerHTML = `${xhr.statusText} (${xhr.status}): ${response.error}`
-    error.hidden=false
+    let message = "Unknown server error";
+
+    try {
+        // Handle JSON error response
+        const response = JSON.parse(xhr.responseText)
+        message = response.error || response.message || xhr.statusText;
+    } catch (e) {
+        // Fallback if server returns plain text or HTML
+        message = xhr.statusText || "Server error";
+    }
+
+    errorText.innerText = message;
+    errorContainer.hidden = false;
 })
 
-htmx.on("htmx:sendError", function (evt) {
-    const requestConfig = evt.detail.requestConfig;
-    const error = document.getElementById('error')
+htmx.on("htmx:sendError", function () {
+    const errorContainer = document.getElementById('error')
+    const errorText = document.getElementById('error-message')
 
-    error.innerHTML = `Network error on <b>${requestConfig.verb} ${requestConfig.path}</b>`
+    errorText.innerText = "Network error. Please check your connection.";
+    errorContainer.hidden = false;
 })
 
 htmx.on("htmx:beforeSend", function () {
-    const error = document.getElementById('error')
-
-    error.innerHTML = ""
-    error.hidden=true
+    document.getElementById('error').hidden = true;
 })
