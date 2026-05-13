@@ -1,3 +1,61 @@
 @import "tailwindcss";
 @source "../index.html";
 @source "../404.html";
+
+/* Reusable cards */
+.card {
+    @apply bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none;
+}
+
+/* Input fields */
+.input-primary {
+    @apply flex-grow px-4 py-3 rounded-2xl border border-slate-100 dark:border-slate-800 dark:bg-slate-950 outline-none focus:ring-2 transition-all text-sm font-mono truncate;
+}
+
+/* Buttons */
+.btn-primary {
+    @apply text-gray-400 px-5 rounded-2xl font-bold active:scale-95 transition shadow-lg;
+}
+
+/* Small labels */
+.label-xs {
+    @apply block text-[10px] font-bold uppercase tracking-[0.2em] mb-3;
+}
+
+/* Error cards */
+.error-card {
+    @apply flex items-start gap-4 p-6 bg-red-50/50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/30 rounded-3xl;
+}
+
+/* Flex layouts */
+.flex-col-gap {
+    @apply flex flex-col gap-6;
+}
+
+.flex-center {
+    @apply flex items-center justify-center;
+}
+
+/* Map container */
+.map-container {
+    @apply absolute inset-0;
+}
+
+/* Info card inside template */
+.info-card {
+    @apply duration-500;
+}
+
+/* Centered icon circle */
+.icon-circle {
+    @apply mb-6 inline-flex items-center justify-center w-20 h-20 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-full;
+}
+
+/* Typography */
+.heading-404 {
+    @apply text-6xl font-black font-mono tracking-tighter text-slate-800 dark:text-white mb-2;
+}
+
+.text-center-container {
+    @apply max-w-md w-full text-center;
+}
