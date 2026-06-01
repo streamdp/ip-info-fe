@@ -50,11 +50,22 @@
 
             <!-- Global Lookup -->
             <section class="card">
-                <form id="ip-info-form" hx-get="/ip-info" hx-target="#search-result" nunjucks-template="info-template"
-                      hx-on::before-request="clear('search-result')">
+                <form id="ip-info-form"
+                      hx-get="/ip-info"
+                      hx-target="#search-result"
+                      nunjucks-template="info-template"
+                      hx-on::before-request="clear('search-result')"
+                >
                     <label class="label-xs text-slate-400">Global Lookup</label>
                     <div class="flex items-stretch gap-2">
-                        <input name="ip" placeholder="e.g. 1.1.1.1" class="input-primary">
+                        <input id="ip-input"
+                               name="ip"
+                               placeholder="e.g. 1.1.1.1"
+                               class="input-primary"
+                               onchange="this.setCustomValidity('')"
+                               hx-on:htmx:validation:validate="validate(this)"
+                               type="search"
+                        >
                         <button type="submit" class="btn-primary">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
@@ -81,7 +92,7 @@
             <div class="flex flex-col md:flex-row justify-center items-center gap-6 text-slate-400">
                 <p class="text-slate-400 text-xs text-center uppercase tracking-widest font-semibold">
                     &copy; <span id="copyright"><script>document.write(new Date().getFullYear())</script></span>
-                    oncook.top infrastructure
+                    <a href="https://oncook.top" target="_blank">oncook.top</a> infrastructure
                     <a href="https://github.com/streamdp" target="_blank">(view source code)</a>
                 </p>
             </div>
